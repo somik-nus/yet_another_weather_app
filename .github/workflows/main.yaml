@@ -19,6 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       OPENWEATHERMAP_KEY: ${{ secrets.OPENWEATHERMAP_API}}
+
     steps:
 
     # https://github.com/marketplace/actions/setup-java-jdk
@@ -41,3 +42,11 @@ jobs:
     - name: Test run the app on the server
       run: mvn clean test
 
+    # https://github.com/marketplace/actions/deploy-to-heroku
+    - name: Deploy on heroku
+      uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+      with:
+        heroku_api_key: ${{ secrets.HEROKU_API }}
+        heroku_app_name: ${{ secrets.HEROKU_APP_YATA }}
+        heroku_email:  ${{ secrets.HEROKU_EMAIL }}  # rescigg76@imageperl.com
+        branch: ${{ github.ref_name }} # Tell heroku to take releasing branch
