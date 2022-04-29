@@ -13,3 +13,6 @@ jobs:
     - name: print the current branch
       run: echo ${{ github.ref_name }}
 
+    - name: Simulate a failure
+      run: exit 1
+
